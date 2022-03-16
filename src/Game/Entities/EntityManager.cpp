@@ -5,28 +5,25 @@ void EntityManager::tick(){
         killableCounter--;
         if (killableCounter == 0){
             killable = false;
-            for(Entity* entity:ghosts){
+            for(Entity* entity : ghosts){
                 Ghost* ghost = dynamic_cast<Ghost*>(entity); 
                 ghost->setKillable(false);
             }
         }
     }
-    std::vector<int> toRemove;
     
     for(unsigned int i=0;i<entities.size();i++){
         if(!entities[i]->remove){
             entities[i]->tick();
 
         }else{
-            toRemove.push_back(i);
+            Entity* entityPointer = entities[i];
+            entities.erase(entities.begin() + i--);
+            delete entityPointer;
+
         }
     }
-    for(unsigned int removable: toRemove){
-        Entity* entityPointer = entities[removable];
-        entities.erase(entities.begin() + removable);
-        delete entityPointer;
-    }
-    toRemove.clear();
+
     for(BoundBlock* BoundBlock: boundBlocks){
         BoundBlock->tick();
     }
@@ -35,14 +32,12 @@ void EntityManager::tick(){
             ghosts[i]->tick();
 
         }else{
-            toRemove.push_back(i);
+            Ghost* ghostPtr = dynamic_cast<Ghost*>(ghosts[i]);
+            ghosts.erase(ghosts.begin() + i--);
+            delete ghostPtr;
         }
     }
-    for(unsigned int removable: toRemove){
-        Ghost* entityPointer = dynamic_cast<Ghost*>(ghosts[removable]);
-        ghosts.erase(ghosts.begin() + removable);
-        delete entityPointer;
-    }
+
 }
 
 void EntityManager::render(){
@@ -59,7 +54,7 @@ void EntityManager::render(){
 
 void EntityManager::setKillable(bool k){
     killable = true;
-    killableCounter=30*10;
+    killableCounter=10*ofGetFrameRate();
     for(Entity* entity:ghosts){
         Ghost* ghost = dynamic_cast<Ghost*>(entity); 
         ghost->setKillable(true);
