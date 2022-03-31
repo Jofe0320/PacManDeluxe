@@ -52,6 +52,10 @@ void EntityManager::render(){
     }
 }
 
+bool EntityManager::NoDots(){
+    return (this->entities.size() == 0);
+}
+
 void EntityManager::setKillable(bool k){
     killable = true;
     killableCounter=10*ofGetFrameRate();

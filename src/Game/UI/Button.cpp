@@ -1,6 +1,6 @@
 #include "Button.h"
 Button::Button(){
-   this->xPos = ofGetWidth()/2;
+    this->xPos = ofGetWidth()/2;
     this->yPos = ofGetHeight()/2;
     this->width = 64;
     this->height = 20; 

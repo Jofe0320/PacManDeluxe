@@ -34,6 +34,22 @@ void GhostSpawner::spawnGhost(string color){
 
 void GhostSpawner::keyPressed(int key){
     if(key == 'g'){
-        spawnGhost("red");
+    int i = rand()%4;
+        string ghostColor;
+        switch (i){
+        case 0:
+            ghostColor = "red";
+            break;
+        case 1:
+            ghostColor = "cyan";
+            break;
+        case 2:
+            ghostColor = "pink";
+            break;
+        case 3:
+            ghostColor="orange";
+            break;
+        }
+        spawnGhost(ghostColor);
     }
 }

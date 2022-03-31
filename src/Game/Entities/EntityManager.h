@@ -12,6 +12,7 @@ public:
 	void tick();
 	void render();
 	void setKillable(bool);
+	bool NoDots();
 
 private:
 	bool killable = false;

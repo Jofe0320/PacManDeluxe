@@ -43,6 +43,11 @@ void Map::setPlayer(Player* p){
 Player* Map::getPlayer(){
 	return player;
 }
+
+EntityManager* Map::getEntityManager(){
+	return entityManager;
+}
+
 void Map::setGhostSpawner(GhostSpawner* p){
     gs = p;
 }
