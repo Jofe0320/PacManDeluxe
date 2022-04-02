@@ -3,6 +3,9 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "PowerUp.h"
+#include"EatingTime.h"
+
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
     spawnX = x;
@@ -116,6 +119,20 @@ void Player::keyPressed(int key){
                 health++;
             }
             break;
+        case ' ':
+            PowerUp* Hungry = new EatingTime(this);
+            Hungry->activate();
+
+            
+            
+            break;
+
+           
+            
+            
+         
+            
+            
     }
 }
 
@@ -130,6 +147,8 @@ void Player::mousePressed(int x, int y, int button){
 
 int Player::getHealth(){ return health; }
 int Player::getScore(){ return score; }
+
+EntityManager* Player::getPlayerEm(){return em;}
 FACING Player::getFacing(){ return facing; }
 void Player::setHealth(int h){ health = h; }
 void Player::setFacing(FACING facing){ this->facing = facing; }
