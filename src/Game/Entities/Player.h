@@ -2,6 +2,7 @@
 
 #include "Animation.h"
 #include "EntityManager.h"
+#include "PowerUp.h"
 
 
 
@@ -33,6 +34,7 @@ class Player: public Entity{
         Animation *walkLeft;
         Animation *walkRight;
         EntityManager* em;
+        PowerUp* Power;
             
 
 

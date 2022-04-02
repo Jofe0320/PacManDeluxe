@@ -120,11 +120,8 @@ void Player::keyPressed(int key){
             }
             break;
         case ' ':
-            PowerUp* Hungry = new EatingTime(this);
-            Hungry->activate();
-
-            
-            
+             Power = new EatingTime(this);
+             Power->activate();
             break;
 
            
