@@ -3,6 +3,13 @@
 #include "Animation.h"
 #include "EntityManager.h"
 
+
+
+
+
+
+
+
 enum MOVING {
 	MUP,
 	MDOWN,
@@ -26,12 +33,15 @@ class Player: public Entity{
         Animation *walkLeft;
         Animation *walkRight;
         EntityManager* em;
+            
+
 
     public:
         Player(int, int, int , int, EntityManager*);
         ~Player();
         int getHealth();
         int getScore();
+        EntityManager* getPlayerEm();
         FACING getFacing();
         void setHealth(int);
         void setScore(int);
