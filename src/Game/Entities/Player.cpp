@@ -144,7 +144,6 @@ void Player::mousePressed(int x, int y, int button){
 
 int Player::getHealth(){ return health; }
 int Player::getScore(){ return score; }
-
 EntityManager* Player::getPlayerEm(){return em;}
 FACING Player::getFacing(){ return facing; }
 void Player::setHealth(int h){ health = h; }
@@ -176,6 +175,9 @@ void Player::checkCollisions(){
             if(dynamic_cast<BigDot*>(entity)){
                 score +=20;
                 em->setKillable(true);
+            }
+            if(dynamic_cast<Cherry*>(entity)){
+                entity->remove = true;
             }
         }
     }

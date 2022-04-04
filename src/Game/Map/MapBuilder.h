@@ -5,6 +5,7 @@
 #include "Dot.h"
 #include "BigDot.h"
 #include "Ghost.h"
+#include "Cherry.h"
 
 class MapBuilder {
     public:
@@ -23,4 +24,5 @@ class MapBuilder {
         ofImage tempBound;
         ofImage getSprite(ofImage, int, int);
         EntityManager* entityManager;
+        int dotCounter = 0;
 };

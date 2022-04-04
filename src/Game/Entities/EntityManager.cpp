@@ -37,7 +37,6 @@ void EntityManager::tick(){
             delete ghostPtr;
         }
     }
-
 }
 
 void EntityManager::render(){
@@ -49,6 +48,9 @@ void EntityManager::render(){
     }
     for(Entity* ghost: ghosts){
         ghost->render();
+    }
+    for (Entity* Cherry: Cherrys){
+        Cherry->render();
     }
 }
 

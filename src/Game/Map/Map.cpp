@@ -36,6 +36,7 @@ void Map::addBoundBlock(BoundBlock* e){
 void Map::addEntity(Entity* e){
 	entityManager->entities.push_back(e);
 }
+
 void Map::setPlayer(Player* p){
     player = p;
 }
