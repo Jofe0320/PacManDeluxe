@@ -69,6 +69,10 @@ Map* MapBuilder::createMap(ofImage mapImage){
 					Cherry* cherry = new Cherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(cherry);
 				}
+				else if (dotCounter%50 == 0){
+					Strawberry* strawberry = new Strawberry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+					mapInCreation->addEntity(strawberry);
+				}
 				else{
 					Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(dot);

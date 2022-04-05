@@ -6,6 +6,7 @@
 #include "BigDot.h"
 #include "Ghost.h"
 #include "Cherry.h"
+#include "Strawberry.h"
 
 class MapBuilder {
     public:

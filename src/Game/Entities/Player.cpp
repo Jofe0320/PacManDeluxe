@@ -7,6 +7,7 @@
 #include"EatingTime.h"
 #include"PowerUp.h"
 #include"CherryPowerUp.h"
+#include"Strawberry.h"
 
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
@@ -187,6 +188,9 @@ void Player::checkCollisions(){
             if(dynamic_cast<Cherry*>(entity)){
                 entity->remove = true;
                 CherryFlag = true; 
+            }
+            if(dynamic_cast<Strawberry*>(entity)){
+                entity->remove = true;
             }
         }
     }
