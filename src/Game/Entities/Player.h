@@ -57,4 +57,5 @@ class Player: public Entity{
         void reset();
         void checkCollisions();
         void die();
+        bool CherryFlag = false;
 };

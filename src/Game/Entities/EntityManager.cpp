@@ -49,9 +49,6 @@ void EntityManager::render(){
     for(Entity* ghost: ghosts){
         ghost->render();
     }
-    for (Entity* Cherry: Cherrys){
-        Cherry->render();
-    }
 }
 
 bool EntityManager::NoDots(){

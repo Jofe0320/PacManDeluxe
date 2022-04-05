@@ -5,6 +5,8 @@
 #include "Ghost.h"
 #include "PowerUp.h"
 #include"EatingTime.h"
+#include"PowerUp.h"
+#include"CherryPowerUp.h"
 
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
@@ -120,8 +122,14 @@ void Player::keyPressed(int key){
             }
             break;
         case ' ':
-             Power = new EatingTime(this);
-             Power->activate();
+            if (CherryFlag == true){
+                Power = new CherryPowerUp(this,this->getPlayerEm());
+                CherryFlag = false;
+            }
+            else{
+                Power = new EatingTime(this);
+            }
+            Power->activate();
             break;
 
            
@@ -178,6 +186,7 @@ void Player::checkCollisions(){
             }
             if(dynamic_cast<Cherry*>(entity)){
                 entity->remove = true;
+                CherryFlag = true; 
             }
         }
     }
