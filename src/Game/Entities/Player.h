@@ -59,5 +59,5 @@ class Player: public Entity{
         void die();
         bool CherryFlag = false;
         bool straw = false;
-        int stepCounter = 50;
+        int StrawStepCounter = 50;
 };

@@ -19,6 +19,6 @@ class StrawberryPowerUp: public PowerUp{
         return this->em;
     }
     void activate(){
-        this->getPacman()->stepCounter = 0;
+        this->getPacman()->StrawStepCounter = 0;
     }
 };

@@ -67,26 +67,26 @@ void Player::tick(){
     if(facing == UP && canMoveUp){
         y-= speed;
         walkUp->tick();
-        stepCounter += 1;
+        StrawStepCounter += 1;
     }else if(facing == DOWN && canMoveDown){
         y+=speed;
         walkDown->tick();
-        stepCounter += 1;
+        StrawStepCounter += 1;
     }else if(facing == LEFT && canMoveLeft){
         x-=speed;
         walkLeft->tick();
-        stepCounter += 1;
+        StrawStepCounter += 1;
     }else if(facing == RIGHT && canMoveRight){
         x+=speed;
         walkRight->tick();
-        stepCounter += 1;
+        StrawStepCounter += 1;
     }
 }
 
 void Player::render(){
     ofSetColor(256,256,256);
     // ofDrawRectangle(getBounds());
-    if (stepCounter > 50){
+    if (StrawStepCounter > 50){
     if(facing == UP)
         walkUp->getCurrentFrame().draw(x, y, width, height);
     else if(facing == DOWN)
@@ -190,22 +190,26 @@ void Player::checkCollisions(){
             }
             if(dynamic_cast<Cherry*>(entity)){
                 entity->remove = true;
-                CherryFlag = true; 
+                CherryFlag = true;
+                straw = false;
+                
             }
             if(dynamic_cast<Strawberry*>(entity)){
                 entity->remove = true;
                 straw = true;
-                
+                CherryFlag = false;
             }
         }
     }
     for(Entity* entity:em->ghosts){
         if(collides(entity)){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
+            if (StrawStepCounter > 50){
             if(ghost->getKillable())
                 ghost->remove = true;
             else
                 die();
+            }
         }
     }
 
