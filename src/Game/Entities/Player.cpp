@@ -8,6 +8,7 @@
 #include"PowerUp.h"
 #include"CherryPowerUp.h"
 #include"Strawberry.h"
+#include"StrawberryPowerUp.h"
 
 
 Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
@@ -66,22 +67,26 @@ void Player::tick(){
     if(facing == UP && canMoveUp){
         y-= speed;
         walkUp->tick();
+        stepCounter += 1;
     }else if(facing == DOWN && canMoveDown){
         y+=speed;
         walkDown->tick();
+        stepCounter += 1;
     }else if(facing == LEFT && canMoveLeft){
         x-=speed;
         walkLeft->tick();
+        stepCounter += 1;
     }else if(facing == RIGHT && canMoveRight){
         x+=speed;
         walkRight->tick();
+        stepCounter += 1;
     }
 }
 
 void Player::render(){
     ofSetColor(256,256,256);
     // ofDrawRectangle(getBounds());
-
+    if (stepCounter > 50){
     if(facing == UP)
         walkUp->getCurrentFrame().draw(x, y, width, height);
     else if(facing == DOWN)
@@ -90,7 +95,7 @@ void Player::render(){
         walkLeft->getCurrentFrame().draw(x, y, width, height);
     else if(facing == RIGHT)
         walkRight->getCurrentFrame().draw(x, y, width, height);
-    
+    }
     ofSetColor(256, 0, 0);
     ofDrawBitmapString("Health: ", ofGetWidth()/2 + 100, 50);
 
@@ -98,6 +103,7 @@ void Player::render(){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
     }
     ofDrawBitmapString("Score:"  + to_string(score), ofGetWidth()/2-200, 50);
+    
 }
 
 void Player::keyPressed(int key){
@@ -127,18 +133,15 @@ void Player::keyPressed(int key){
                 Power = new CherryPowerUp(this,this->getPlayerEm());
                 CherryFlag = false;
             }
+            else if (straw == true){
+                Power = new StrawberryPowerUp(this,this->getPlayerEm());
+                straw = false;
+            }
             else{
                 Power = new EatingTime(this);
             }
             Power->activate();
-            break;
-
-           
-            
-            
-         
-            
-            
+            break; 
     }
 }
 
@@ -191,6 +194,8 @@ void Player::checkCollisions(){
             }
             if(dynamic_cast<Strawberry*>(entity)){
                 entity->remove = true;
+                straw = true;
+                
             }
         }
     }

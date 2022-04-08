@@ -58,4 +58,6 @@ class Player: public Entity{
         void checkCollisions();
         void die();
         bool CherryFlag = false;
+        bool straw = false;
+        int stepCounter = 50;
 };

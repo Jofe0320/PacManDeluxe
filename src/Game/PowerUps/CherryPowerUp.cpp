@@ -11,8 +11,9 @@ Entity* CherryPowerUp::getRandomEntity(){
     return this->getEm()->entities[ofRandom(0,this->getEm()->entities.size())];
 }
 void CherryPowerUp::activate(){
-    this->getPacman()->setX(getRandomEntity()->getX());
-    this->getPacman()->setY(getRandomEntity()->getY());
+    Entity* Position = getRandomEntity();
+    this->getPacman()->setX(Position->getX());
+    this->getPacman()->setY(Position->getY());
 }
 
 
