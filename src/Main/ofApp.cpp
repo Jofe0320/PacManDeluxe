@@ -5,6 +5,7 @@ void ofApp::setup(){
 	ofSetWindowTitle("C++ Game Box");
 	//States
 	menuState = new MenuState();
+	characterState = new CharacterState();
 	gameState = new GameState();
 	gameOverState = new GameOverState();
 	winState = new WinState();
@@ -21,10 +22,15 @@ void ofApp::update(){
 			if(currentState->getNextState() == "Menu"){
 				currentState = menuState;
 			}else if(currentState->getNextState() == "Game"){
+				if(characterState->PacMan() == true){
+					gameState->setCharacter("images/pacman.png");
+				}else{gameState->setCharacter("images/misspacman.jpg");}
 				currentState = gameState;
 			}else if(currentState->getNextState() == "over"){
 				gameOverState->setScore(gameState->getFinalScore());
 				currentState = gameOverState;
+			}else if (currentState->getNextState() == "Character"){
+				currentState = characterState;
 			}
 			currentState->reset();
 		}else if(currentState->hasFinished() == false){

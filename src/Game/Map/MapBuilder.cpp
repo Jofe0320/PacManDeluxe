@@ -44,7 +44,7 @@ MapBuilder::MapBuilder(){
 	bound.push_back(tempBound);//single
 }
 
-Map* MapBuilder::createMap(ofImage mapImage){
+Map* MapBuilder::createMap(ofImage mapImage, string characterID){
 	int xOffset = (ofGetWidth() - mapImage.getWidth()*pixelMultiplier)/2;
 	int yOffset = (ofGetHeight() - mapImage.getHeight()*pixelMultiplier)/2;
 
@@ -59,8 +59,14 @@ Map* MapBuilder::createMap(ofImage mapImage){
                 BoundBlock* BoundBoundBlock = new BoundBlock(xPos,yPos,pixelMultiplier,pixelMultiplier,getSprite(mapImage,i,j));
                 mapInCreation->addBoundBlock(BoundBoundBlock);
             }else if(currentPixel == pacman){
-                Player* PacMan = new Player(xPos,yPos,pixelMultiplier,pixelMultiplier, entityManager);
-				mapInCreation->setPlayer(PacMan);
+                if(characterID == "images/pacman.png"){
+					Player* PacMan = new Player(xPos,yPos,pixelMultiplier,pixelMultiplier, entityManager, "images/pacman.png");
+					mapInCreation->setPlayer(PacMan);
+				}
+				else if(characterID == "images/misspacman.jpg"){
+					Player* PacMan = new Player(xPos,yPos,pixelMultiplier,pixelMultiplier, entityManager, "images/misspacman.jpg");
+					mapInCreation->setPlayer(PacMan);
+				}
             }else if(currentPixel == ghostC){
                 GhostSpawner* ghostSpawn = new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,entityManager, pacmanSpriteSheet);
                 mapInCreation->setGhostSpawner(ghostSpawn);
@@ -72,6 +78,10 @@ Map* MapBuilder::createMap(ofImage mapImage){
 				else if (dotCounter%50 == 0){
 					Strawberry* strawberry = new Strawberry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(strawberry);
+				}
+				else if (dotCounter%30 == 0){
+					Fruits* fruit = new Fruits(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+					mapInCreation->addEntity(fruit);
 				}
 				else{
 					Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);

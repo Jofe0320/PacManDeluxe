@@ -5,7 +5,7 @@
 GameState::GameState() {
 	music.load("music/pacman_chomp.wav");
 	mapImage.load("images/map1.png");
-	map = MapBuilder().createMap(mapImage);
+	map = MapBuilder().createMap(mapImage, getCharacter());
 }
 void GameState::tick() {
 	if(!music.isPlaying()){
@@ -55,7 +55,7 @@ void GameState::keyReleased(int key){
 void GameState::reset(){
 	setFinished(false);
 	setNextState("");
-	map = MapBuilder().createMap(mapImage);
+	map = MapBuilder().createMap(mapImage, getCharacter());
 }
 
 int GameState::getFinalScore(){
@@ -64,6 +64,14 @@ int GameState::getFinalScore(){
 
 int GameState::getCurrentScore(){
 	return CurrentScore;
+}
+
+string GameState::getCharacter(){
+	return CharacterSelected;
+}
+
+void GameState::setCharacter(string Character){
+	CharacterSelected = Character;
 }
 
 GameState::~GameState(){

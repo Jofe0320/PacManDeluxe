@@ -23,6 +23,7 @@ class Player: public Entity{
         int spawnX, spawnY;
         unsigned int health=3;
         int score=0;
+        int fruitScore = rand()%41+10;
         bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
         int speed = 4;
         bool walking = false;
@@ -39,7 +40,7 @@ class Player: public Entity{
 
 
     public:
-        Player(int, int, int , int, EntityManager*);
+        Player(int, int, int , int, EntityManager*, string);
         ~Player();
         int getHealth();
         int getScore();
@@ -59,5 +60,6 @@ class Player: public Entity{
         void die();
         bool CherryFlag = false;
         bool straw = false;
+        bool fruit = false;
         int StrawStepCounter = 50;
 };

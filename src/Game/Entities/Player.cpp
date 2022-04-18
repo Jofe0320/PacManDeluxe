@@ -6,15 +6,18 @@
 #include "PowerUp.h"
 #include"EatingTime.h"
 #include"PowerUp.h"
+#include "Cherry.h"
 #include"CherryPowerUp.h"
 #include"Strawberry.h"
 #include"StrawberryPowerUp.h"
+#include "Fruits.h"
+#include "RandomPowerUp.h"
 
 
-Player::Player(int x, int y, int width, int height, EntityManager* em) : Entity(x, y, width, height){
+Player::Player(int x, int y, int width, int height, EntityManager* em, string characterSelected) : Entity(x, y, width, height){
     spawnX = x;
     spawnY = y;
-    sprite.load("images/pacman.png");
+    sprite.load(characterSelected);
     down.cropFrom(sprite, 0, 48, 16, 16);
     up.cropFrom(sprite, 0, 32, 16, 16);
     left.cropFrom(sprite, 0, 16, 16, 16);
@@ -185,19 +188,30 @@ void Player::checkCollisions(){
                 score += 10;
             }
             if(dynamic_cast<BigDot*>(entity)){
-                score +=20;
+                score +=50;
                 em->setKillable(true);
             }
             if(dynamic_cast<Cherry*>(entity)){
+                score +=20;
                 entity->remove = true;
                 CherryFlag = true;
                 straw = false;
+                fruit = false;
                 
             }
             if(dynamic_cast<Strawberry*>(entity)){
+                score +=20;
                 entity->remove = true;
                 straw = true;
                 CherryFlag = false;
+                fruit = false;
+            }
+            if(dynamic_cast<Fruits*>(entity)){
+                score += fruitScore;
+                entity->remove = true;
+                fruit = true;
+                CherryFlag = false;
+                straw = false;
             }
         }
     }

@@ -16,6 +16,9 @@ class GameState: public State{
 		void keyReleased(int key);
 		int getFinalScore();
 		int getCurrentScore();
+		string CharacterSelected;
+		string getCharacter();
+		void setCharacter(string characterSelecting);
 	
 	private:
 		ofSoundPlayer music;

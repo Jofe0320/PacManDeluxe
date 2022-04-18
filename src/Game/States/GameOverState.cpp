@@ -16,7 +16,7 @@ void GameOverState::tick() {
 	startButton->tick();
 	anim->tick();
 	if(startButton->wasPressed()){
-		setNextState("Game");
+		setNextState("Character");
 		setFinished(true);
 
 	}

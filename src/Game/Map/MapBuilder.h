@@ -7,11 +7,13 @@
 #include "Ghost.h"
 #include "Cherry.h"
 #include "Strawberry.h"
+#include "CharacterState.h"
+#include "Fruits.h"
 
 class MapBuilder {
     public:
         MapBuilder();
-	    Map* createMap(ofImage);
+	    Map* createMap(ofImage, string);
 
 	private:
         vector<ofImage> bound;
@@ -22,8 +24,10 @@ class MapBuilder {
 	    ofColor dotC;
 	    ofColor bigDotC;
         ofImage pacmanSpriteSheet;
+        vector <ofImage>* fruits;
         ofImage tempBound;
         ofImage getSprite(ofImage, int, int);
         EntityManager* entityManager;
+        CharacterState* characterID;
         int dotCounter = 0;
 };
