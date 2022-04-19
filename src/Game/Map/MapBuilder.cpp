@@ -71,15 +71,15 @@ Map* MapBuilder::createMap(ofImage mapImage, string characterID){
                 GhostSpawner* ghostSpawn = new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,entityManager, pacmanSpriteSheet);
                 mapInCreation->setGhostSpawner(ghostSpawn);
             }else if(currentPixel == dotC){
-				if (dotCounter%43 == 0){
+				if (dotCounter%(rand()%100+1) == 0){
 					Cherry* cherry = new Cherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(cherry);
 				}
-				else if (dotCounter%50 == 0){
+				else if (dotCounter%(rand()%200+1) == 0){
 					Strawberry* strawberry = new Strawberry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(strawberry);
 				}
-				else if (dotCounter%30 == 0){
+				else if (dotCounter%(rand()%200+1) == 0){
 					Fruits* fruit = new Fruits(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(fruit);
 				}

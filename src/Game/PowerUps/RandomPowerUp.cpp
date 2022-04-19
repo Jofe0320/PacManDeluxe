@@ -9,5 +9,8 @@ EntityManager* RandomPowerUp::getEm(){
 Entity* RandomPowerUp::getRandomEntity(){
     return this->getEm()->entities[ofRandom(0,this->getEm()->entities.size())];
 }
+
 void RandomPowerUp::activate(){
+    Player* Pacman = getPacman();
+    Pacman->setScore(Pacman->getScore() + points);
 }

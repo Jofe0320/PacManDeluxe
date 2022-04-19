@@ -8,7 +8,7 @@ class RandomPowerUp : public PowerUp{
 
 public:
     void activate();
-    int points;
+    int points =  rand()%50;
 
     Player *Pacman;
     EntityManager *em;

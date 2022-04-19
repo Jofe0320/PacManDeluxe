@@ -23,7 +23,6 @@ class Player: public Entity{
         int spawnX, spawnY;
         unsigned int health=3;
         int score=0;
-        int fruitScore = rand()%41+10;
         bool canMoveUp, canMoveDown, canMoveRight, canMoveLeft;
         int speed = 4;
         bool walking = false;

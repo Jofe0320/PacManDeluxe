@@ -139,6 +139,9 @@ void Player::keyPressed(int key){
             else if (straw == true){
                 Power = new StrawberryPowerUp(this,this->getPlayerEm());
                 straw = false;
+            }else if (fruit == true){
+                Power = new RandomPowerUp(this,this->getPlayerEm());
+                fruit = false;
             }
             else{
                 Power = new EatingTime(this);
@@ -207,7 +210,6 @@ void Player::checkCollisions(){
                 fruit = false;
             }
             if(dynamic_cast<Fruits*>(entity)){
-                score += fruitScore;
                 entity->remove = true;
                 fruit = true;
                 CherryFlag = false;
