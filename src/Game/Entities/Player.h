@@ -60,5 +60,10 @@ class Player: public Entity{
         bool CherryFlag = false;
         bool straw = false;
         bool fruit = false;
+        bool GhostK;
+        int cherryCounter =0;
+        int strawCounter =0;
+        int fruitCounter =0;
+        int GhostKCounter =0;
         int StrawStepCounter = 50;
 };

@@ -12,6 +12,8 @@
 #include"StrawberryPowerUp.h"
 #include "Fruits.h"
 #include "RandomPowerUp.h"
+#include "GhostKiller.h"
+#include "GhostKillerPowerUp.h"
 
 
 Player::Player(int x, int y, int width, int height, EntityManager* em, string characterSelected) : Entity(x, y, width, height){
@@ -132,21 +134,36 @@ void Player::keyPressed(int key){
             }
             break;
         case ' ':
-            if (CherryFlag == true){
+            if(CherryFlag == true || straw == true|| fruit == true||GhostK == true){
+            if (CherryFlag == true && cherryCounter >0){
                 Power = new CherryPowerUp(this,this->getPlayerEm());
-                CherryFlag = false;
+                if(cherryCounter == 1){CherryFlag = false;}
+                cherryCounter--;
+                Power->activate();
             }
-            else if (straw == true){
+            if (straw == true && strawCounter>0){
                 Power = new StrawberryPowerUp(this,this->getPlayerEm());
-                straw = false;
-            }else if (fruit == true){
+                if(strawCounter == 1){straw = false;}
+                strawCounter--;
+                Power->activate();
+            }
+            if (fruit == true && fruitCounter>0){
                 Power = new RandomPowerUp(this,this->getPlayerEm());
-                fruit = false;
+                if(fruitCounter == 1){fruit = false;}
+                fruitCounter--;
+                Power->activate();
+            }
+            if (GhostK == true && GhostKCounter >0){
+                Power = new GhostKillerPowerUp(this,this->getPlayerEm());
+                if(GhostKCounter == 1){GhostK = false;}
+                GhostKCounter--;
+                Power->activate();
+            }
             }
             else{
                 Power = new EatingTime(this);
+                Power->activate();
             }
-            Power->activate();
             break; 
     }
 }
@@ -198,22 +215,25 @@ void Player::checkCollisions(){
                 score +=20;
                 entity->remove = true;
                 CherryFlag = true;
-                straw = false;
-                fruit = false;
-                
+                cherryCounter++;
             }
             if(dynamic_cast<Strawberry*>(entity)){
                 score +=20;
                 entity->remove = true;
                 straw = true;
-                CherryFlag = false;
-                fruit = false;
+                strawCounter++;
             }
             if(dynamic_cast<Fruits*>(entity)){
                 entity->remove = true;
                 fruit = true;
-                CherryFlag = false;
-                straw = false;
+                fruitCounter++;
+            }
+            if(dynamic_cast<GhostKiller*>(entity)){
+                score +=20;
+                entity->remove = true;
+                GhostK = true;
+                GhostKCounter++;
+
             }
         }
     }

@@ -83,6 +83,10 @@ Map* MapBuilder::createMap(ofImage mapImage, string characterID){
 					Fruits* fruit = new Fruits(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(fruit);
 				}
+				else if (dotCounter%250 == 0){
+					GhostKiller* ghostKiller = new GhostKiller(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+					mapInCreation->addEntity(ghostKiller);
+				}
 				else{
 					Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(dot);

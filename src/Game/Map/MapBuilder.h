@@ -9,6 +9,7 @@
 #include "Strawberry.h"
 #include "CharacterState.h"
 #include "Fruits.h"
+#include "GhostKiller.h"
 
 class MapBuilder {
     public:
