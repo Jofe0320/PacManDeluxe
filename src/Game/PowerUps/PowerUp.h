@@ -2,6 +2,6 @@
 class PowerUp{
     public:
     PowerUp(){}
-    virtual void activate() = 0;
+    virtual void activate() = 0; //virtual Method
 
 };

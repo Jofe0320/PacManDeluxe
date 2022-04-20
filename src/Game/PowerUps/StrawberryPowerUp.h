@@ -18,6 +18,7 @@ class StrawberryPowerUp: public PowerUp{
     EntityManager* getEm(){
         return this->em;
     }
+    //Activate a counter that on player.cpp would make pacman invicible and invencible for certain steps
     void activate(){
         this->getPacman()->StrawStepCounter = 0;
     }

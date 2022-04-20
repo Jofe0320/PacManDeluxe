@@ -91,7 +91,7 @@ void Player::tick(){
 void Player::render(){
     ofSetColor(256,256,256);
     // ofDrawRectangle(getBounds());
-    if (StrawStepCounter > 50){
+    if (StrawStepCounter > 50){    // Uses the strawStepCounter to not render pacman for some steps
     if(facing == UP)
         walkUp->getCurrentFrame().draw(x, y, width, height);
     else if(facing == DOWN)

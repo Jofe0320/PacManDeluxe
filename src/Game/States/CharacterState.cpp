@@ -2,7 +2,7 @@
 
 CharacterState::CharacterState() {
 	PacManButton = new Button(ofGetWidth()/6-32, 5*ofGetHeight()/6, 64, 50, "Pac-Man");
-    MissPacManButton = new Button(5*ofGetWidth()/6-32, 5*ofGetHeight()/6, 64, 50, "Miss Pac-Man");
+    MissPacManButton = new Button(5*ofGetWidth()/6-60, 5*ofGetHeight()/6, 120, 50, "Miss Pac-Man");
 	img1.load("images/intro.png");
     PacManSprite.load("images/pacman.png");
 	vector<ofImage> leftAnimframes;

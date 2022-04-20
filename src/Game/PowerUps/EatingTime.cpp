@@ -1,5 +1,5 @@
 #include"EatingTime.h"
-
+//Debugger Power Up
 Player* EatingTime::getPacman(){
     return this->Pacman;
 }

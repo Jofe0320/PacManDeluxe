@@ -1,5 +1,5 @@
 #include "GhostKillerPowerUp.h"
-
+//Power Up that remove all Ghosts
 Player* GhostKillerPowerUp::getPacman(){
     return this->Pacman;
 }
@@ -12,7 +12,7 @@ Entity* GhostKillerPowerUp::getRandomEntity(){
 
 void GhostKillerPowerUp::activate(){
     EntityManager* em = getEm();
-
+// This loop eliminates the ghosts
 for(Entity* entity:em->ghosts){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
                 ghost->remove = true;
