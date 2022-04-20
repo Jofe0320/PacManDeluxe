@@ -1,7 +1,9 @@
 #include "WinState.h"
 
 WinState::WinState() {
+	//button to press to continue
 	startButton = new Button(ofGetWidth()/2, ofGetHeight()/2, 64, 50, "Continue");
+	//prepering animation
 	img1.load("images/pacman.png");
 	vector<ofImage> rightAnimframes;
     ofImage temp;
@@ -16,6 +18,7 @@ void WinState::tick() {
 	startButton->tick();
 	anim->tick();
 	if(startButton->wasPressed()){
+		//nextGame being a new fresh game
 		setNextState("NextGame");
 		setFinished(false);
 	}
@@ -39,7 +42,7 @@ void WinState::mousePressed(int x, int y, int button){
 
 void WinState::reset(){
 	setFinished(false);
-	setNextState("Game");
+	setNextState("");
 	startButton->reset();
 }
 

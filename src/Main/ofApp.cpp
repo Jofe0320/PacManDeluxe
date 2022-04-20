@@ -19,39 +19,51 @@ void ofApp::update(){
 	if (currentState != nullptr){
 		currentState->tick();
 		if(currentState->hasFinished()){
+			//menu state
 			if(currentState->getNextState() == "Menu"){
 				currentState = menuState;
-			}else if(currentState->getNextState() == "Game"){
+			}
+			//game State
+			else if(currentState->getNextState() == "Game"){
+				//chooses Pac-Man or Miss Pac-Man
 				if(characterState->PacMan() == true){
 					gameState->setCharacter("images/pacman.png");
 				}else{gameState->setCharacter("images/misspacman.jpg");}
 				currentState = gameState;
-			}else if(currentState->getNextState() == "over"){
+			}
+			//game over state
+			else if(currentState->getNextState() == "over"){
 				gameOverState->setScore(gameState->getFinalScore());
 				currentState = gameOverState;
-			}else if (currentState->getNextState() == "Character"){
+			}
+			//characterState
+			else if (currentState->getNextState() == "Character"){
 				currentState = characterState;
 			}
 			currentState->reset();
 		}else if(currentState->hasFinished() == false){
+			//winState
 			if (currentState->getNextState() =="Win"){
 				int tempScore = gameState->getCurrentScore();
 				winState->reset();
 				winState->setScore(tempScore);
 				currentState = winState;
 			}
+			//game after win
 			else if(currentState->getNextState() == "NextGame"){
 				currentState = gameState;
 				gameState->reset();
 				gameState->setNextState("ContGame");
 			}
+			//pauses game
 			else if(currentState->getNextState() == "Pause"){
 				pauseState->reset();
 				currentState = pauseState;
 			}
+			//continues after Pause
 			else if(currentState->getNextState() == "Continue"){
 				currentState = gameState;
-				gameState->setNextState("ContGame");
+				gameState->setNextState("");
 		}
 		}
 	}
