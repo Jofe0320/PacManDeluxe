@@ -137,25 +137,25 @@ void Player::keyPressed(int key){
             if(CherryFlag == true || straw == true|| fruit == true||GhostK == true){
             if (CherryFlag == true && cherryCounter >0){
                 Power = new CherryPowerUp(this,this->getPlayerEm());
-                if(cherryCounter == 1){CherryFlag = false;}
+                CherryFlag = false;
                 cherryCounter--;
                 Power->activate();
             }
             if (straw == true && strawCounter>0){
                 Power = new StrawberryPowerUp(this,this->getPlayerEm());
-                if(strawCounter == 1){straw = false;}
+                straw = false;
                 strawCounter--;
                 Power->activate();
             }
             if (fruit == true && fruitCounter>0){
                 Power = new RandomPowerUp(this,this->getPlayerEm());
-                if(fruitCounter == 1){fruit = false;}
+                fruit = false;
                 fruitCounter--;
                 Power->activate();
             }
             if (GhostK == true && GhostKCounter >0){
                 Power = new GhostKillerPowerUp(this,this->getPlayerEm());
-                if(GhostKCounter == 1){GhostK = false;}
+                GhostK = false;
                 GhostKCounter--;
                 Power->activate();
             }

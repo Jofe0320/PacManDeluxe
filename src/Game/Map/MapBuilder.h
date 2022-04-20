@@ -31,4 +31,5 @@ class MapBuilder {
         EntityManager* entityManager;
         CharacterState* characterID;
         int dotCounter = 0;
+        int keyNumber =1;
 };

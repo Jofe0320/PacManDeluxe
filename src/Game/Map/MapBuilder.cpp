@@ -71,21 +71,22 @@ Map* MapBuilder::createMap(ofImage mapImage, string characterID){
                 GhostSpawner* ghostSpawn = new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,entityManager, pacmanSpriteSheet);
                 mapInCreation->setGhostSpawner(ghostSpawn);
             }else if(currentPixel == dotC){           //Here we put fruits in random positions in the map
-				if (dotCounter%(rand()%100+1) == 0){
-					Cherry* cherry = new Cherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
-					mapInCreation->addEntity(cherry);
+				if ((dotCounter+1)%(rand()%250+1) == 0 && keyNumber == 1 ){
+					GhostKiller* ghostKiller = new GhostKiller(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+					mapInCreation->addEntity(ghostKiller);
+					keyNumber--;
 				}
-				else if (dotCounter%(rand()%200+1) == 0){
+				else if ((dotCounter+1)%(rand()%200+1) == 0){
 					Strawberry* strawberry = new Strawberry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(strawberry);
 				}
-				else if (dotCounter%(rand()%200+1) == 0){
+				else if ((dotCounter+1)%(rand()%200+1) == 0){
 					Fruits* fruit = new Fruits(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(fruit);
 				}
-				else if (dotCounter%250 == 0){
-					GhostKiller* ghostKiller = new GhostKiller(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
-					mapInCreation->addEntity(ghostKiller);
+				else if ((dotCounter+1)%(rand()%100+1) == 0){
+					Cherry* cherry = new Cherry(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
+					mapInCreation->addEntity(cherry);
 				}
 				else{
 					Dot* dot = new Dot(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
