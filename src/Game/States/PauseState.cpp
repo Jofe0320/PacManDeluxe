@@ -1,7 +1,8 @@
 #include "PauseState.h"
 
 PauseState::PauseState() {
-	startButton = new Button(ofGetWidth()/2-32, ofGetHeight()/2, 64, 50, "Continue Game");
+	//button to press to continue playing
+	startButton = new Button(ofGetWidth()/2-60, ofGetHeight()/2, 120, 50, "Continue Game");
 	img1.load("images/pacman.png");
 	vector<ofImage> rightAnimframes;
     ofImage temp;
@@ -16,6 +17,7 @@ void PauseState::tick() {
 	startButton->tick();
 	anim->tick();
 	if(startButton->wasPressed()){
+		//Continue state is to continue
 		setNextState("Continue");
 		setFinished(false);
 
