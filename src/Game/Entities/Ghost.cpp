@@ -16,9 +16,9 @@ Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityMan
     killableAnim = new Animation(10, killableFrames);
 
     if(color == "red")      sprite.cropFrom(spriteSheet,456,64,16,16);
-    else if(color=="pink")  sprite.cropFrom(spriteSheet,456,78,16,16);
+    else if(color=="pink")  sprite.cropFrom(spriteSheet,456,80,16,16);
     else if(color=="cyan")  sprite.cropFrom(spriteSheet,456,96,16,16);
-    else if(color=="orange")sprite.cropFrom(spriteSheet,456,113,16,16);
+    else if(color=="orange")sprite.cropFrom(spriteSheet,456,112,16,16);
     
 
 }
