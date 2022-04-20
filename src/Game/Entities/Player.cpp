@@ -215,24 +215,38 @@ void Player::checkCollisions(){
                 score +=20;
                 entity->remove = true;
                 CherryFlag = true;
-                cherryCounter++;
+                cherryCounter = 1;
+                GhostKCounter = 0;
+                fruitCounter = 0;
+                strawCounter = 0;
+
             }
             if(dynamic_cast<Strawberry*>(entity)){
                 score +=20;
                 entity->remove = true;
                 straw = true;
-                strawCounter++;
+                strawCounter = 1;
+                cherryCounter = 0;
+                GhostKCounter = 0;
+                fruitCounter = 0;
+
             }
             if(dynamic_cast<Fruits*>(entity)){
                 entity->remove = true;
                 fruit = true;
-                fruitCounter++;
+                fruitCounter = 1;
+                strawCounter = 0;
+                cherryCounter = 0;
+                GhostKCounter = 0;
             }
             if(dynamic_cast<GhostKiller*>(entity)){
                 score +=20;
                 entity->remove = true;
                 GhostK = true;
-                GhostKCounter++;
+                GhostKCounter = 1;
+                fruitCounter = 0;
+                strawCounter = 0;
+                cherryCounter = 0;
 
             }
         }
