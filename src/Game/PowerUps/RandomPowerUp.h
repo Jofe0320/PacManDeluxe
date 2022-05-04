@@ -15,6 +15,7 @@ public:
     RandomPowerUp(Player* Pac, EntityManager* em){
         this->Pacman  = Pac;
         this->em = em;
+        this->setRank(1);
     }
     Player* getPacman();
     EntityManager* getEm();

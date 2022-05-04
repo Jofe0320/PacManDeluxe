@@ -11,6 +11,7 @@ class StrawberryPowerUp: public PowerUp{
     StrawberryPowerUp(Player* Pac, EntityManager* em){
         this->Pacman  = Pac;
         this->em = em;
+        this->setRank(3);
     }
     Player* getPacman(){
         return this->Pacman;

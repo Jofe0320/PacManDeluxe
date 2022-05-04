@@ -9,6 +9,7 @@ class CherryPowerUp : public PowerUp{
     CherryPowerUp(Player* Pac, EntityManager* em){
         this->Pacman  = Pac;
         this->em = em;
+        this->setRank(2);
     }
     Player* getPacman();
     EntityManager* getEm();

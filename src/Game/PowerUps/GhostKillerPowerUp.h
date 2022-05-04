@@ -18,6 +18,7 @@ public:
     GhostKillerPowerUp(Player* Pac, EntityManager* em){
         this->Pacman  = Pac;
         this->em = em;
+        this->setRank(4);
     }
     Player* getPacman();
     EntityManager* getEm();
