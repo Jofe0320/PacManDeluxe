@@ -134,35 +134,9 @@ void Player::keyPressed(int key){
             }
             break;
         case ' ':
-            if(CherryFlag == true || straw == true|| fruit == true||GhostK == true){
-            if (CherryFlag == true && cherryCounter >0){
-                Power = new CherryPowerUp(this,this->getPlayerEm());
-                CherryFlag = false;
-                cherryCounter--;
-                Power->activate();
-            }
-            if (straw == true && strawCounter>0){
-                Power = new StrawberryPowerUp(this,this->getPlayerEm());
-                straw = false;
-                strawCounter--;
-                Power->activate();
-            }
-            if (fruit == true && fruitCounter>0){
-                Power = new RandomPowerUp(this,this->getPlayerEm());
-                fruit = false;
-                fruitCounter--;
-                Power->activate();
-            }
-            if (GhostK == true && GhostKCounter >0){
-                Power = new GhostKillerPowerUp(this,this->getPlayerEm());
-                GhostK = false;
-                GhostKCounter--;
-                Power->activate();
-            }
-            }
-            else{
-                Power = new EatingTime(this);
-                Power->activate();
+            if (PowerCollection.size()>=1){
+            PowerCollection[0]->activate();
+            PowerCollection.erase(PowerCollection.begin());
             }
             break; 
     }
@@ -214,39 +188,24 @@ void Player::checkCollisions(){
             if(dynamic_cast<Cherry*>(entity)){
                 score +=20;
                 entity->remove = true;
-                CherryFlag = true;
-                cherryCounter = 1;
-                GhostKCounter = 0;
-                fruitCounter = 0;
-                strawCounter = 0;
+                PowerCollection.push_back(new CherryPowerUp(this,this->getPlayerEm()));
 
             }
             if(dynamic_cast<Strawberry*>(entity)){
                 score +=20;
                 entity->remove = true;
-                straw = true;
-                strawCounter = 1;
-                cherryCounter = 0;
-                GhostKCounter = 0;
-                fruitCounter = 0;
+                PowerCollection.push_back(new StrawberryPowerUp(this,this->getPlayerEm()));
 
             }
             if(dynamic_cast<Fruits*>(entity)){
                 entity->remove = true;
-                fruit = true;
-                fruitCounter = 1;
-                strawCounter = 0;
-                cherryCounter = 0;
-                GhostKCounter = 0;
+                PowerCollection.push_back(new RandomPowerUp(this,this->getPlayerEm()));
+                
             }
             if(dynamic_cast<GhostKiller*>(entity)){
                 score +=20;
                 entity->remove = true;
-                GhostK = true;
-                GhostKCounter = 1;
-                fruitCounter = 0;
-                strawCounter = 0;
-                cherryCounter = 0;
+                PowerCollection.push_back(new GhostKillerPowerUp(this,this->getPlayerEm()));
 
             }
         }

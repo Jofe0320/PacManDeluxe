@@ -3,6 +3,7 @@
 #include "Animation.h"
 #include "EntityManager.h"
 #include "PowerUp.h"
+#include <vector>
 
 
 
@@ -35,6 +36,7 @@ class Player: public Entity{
         Animation *walkRight;
         EntityManager* em;
         PowerUp* Power;
+        vector<PowerUp*> PowerCollection;
             
 
 
