@@ -12,13 +12,13 @@ class GhostKillerPowerUp : public PowerUp{
     
 public:
     void activate();
-
     Player *Pacman;
     EntityManager *em;
     GhostKillerPowerUp(Player* Pac, EntityManager* em){
         this->Pacman  = Pac;
         this->em = em;
         this->setRank(4);
+        this->setName("GhostKiller");
     }
     Player* getPacman();
     EntityManager* getEm();

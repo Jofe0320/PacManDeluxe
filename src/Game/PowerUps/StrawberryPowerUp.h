@@ -12,6 +12,7 @@ class StrawberryPowerUp: public PowerUp{
         this->Pacman  = Pac;
         this->em = em;
         this->setRank(3);
+        this->setName("Invicible");
     }
     Player* getPacman(){
         return this->Pacman;

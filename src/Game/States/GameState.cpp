@@ -1,17 +1,23 @@
 #include "GameState.h"
 #include "Entity.h"
 #include "EntityManager.h"
+#include "Ultimate.h"
+
 
 GameState::GameState() {
 	music.load("music/pacman_chomp.wav");
 	mapImage.load("images/map1.png");
 	map = MapBuilder().createMap(mapImage, getCharacter());
+	pacmanSpriteSheet.load("images/Background.png");
 }
 void GameState::tick() {
 	if(!music.isPlaying()){
 			music.play();
 	}
 	map->tick();
+	if(map->getPlayer()->getScore()>=1000){
+		map->addEntity(new Ultimate(map->getEntityManager()->entities[0]->getX(),map->getEntityManager()->entities[0]->getY(),16,16,pacmanSpriteSheet));
+	}
 	if(map->getPlayer()->getHealth() == 0){
 		setFinished(true);
 		setNextState("over");
@@ -30,6 +36,15 @@ void GameState::tick() {
 }	
 
 void GameState::render() {
+	string PowerNames = "";
+	for (int i = 0; i < map->getPlayer()->getPowerCollection().size();i++){
+		if (map->getPlayer()->getPowerCollection().size() == 1){
+			PowerNames = PowerNames + map->getPlayer()->getPowerCollection()[i]->getName();
+		}else{
+		PowerNames = PowerNames + "| " + map->getPlayer()->getPowerCollection()[i]->getName();
+		}
+	}
+	ofDrawBitmapString(PowerNames, ofGetWidth()/2-4*PowerNames.size(), (ofGetHeight()/2-300) + 625, 50);
 	map->render();
 }
 

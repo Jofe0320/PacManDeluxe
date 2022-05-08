@@ -10,6 +10,7 @@ class CherryPowerUp : public PowerUp{
         this->Pacman  = Pac;
         this->em = em;
         this->setRank(2);
+        this->setName("Teletransportation");
     }
     Player* getPacman();
     EntityManager* getEm();

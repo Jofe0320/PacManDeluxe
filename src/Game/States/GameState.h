@@ -1,5 +1,5 @@
 #pragma once
-
+#include "ofMain.h" 
 #include "State.h"
 #include "Player.h"
 #include "MapBuilder.h"
@@ -19,6 +19,7 @@ class GameState: public State{
 		string CharacterSelected;
 		string getCharacter();
 		void setCharacter(string characterSelecting);
+		ofImage pacmanSpriteSheet;
 	
 	private:
 		ofSoundPlayer music;

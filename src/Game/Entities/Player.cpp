@@ -14,6 +14,8 @@
 #include "RandomPowerUp.h"
 #include "GhostKiller.h"
 #include "GhostKillerPowerUp.h"
+#include "UltimatePowerUp.h"
+#include "Ultimate.h"
 
 
 Player::Player(int x, int y, int width, int height, EntityManager* em, string characterSelected) : Entity(x, y, width, height){
@@ -133,6 +135,10 @@ void Player::keyPressed(int key){
                 health++;
             }
             break;
+        case 'j':
+            prueba = new UltimatePowerUp(this);
+            prueba->activate();
+            break;
         case ' ':
             if (PowerCollection.size()>=1){
             PowerCollection[0]->activate();
@@ -155,6 +161,7 @@ int Player::getHealth(){ return health; }
 int Player::getScore(){ return score; }
 EntityManager* Player::getPlayerEm(){return em;}
 FACING Player::getFacing(){ return facing; }
+vector<PowerUp*> Player::getPowerCollection(){return PowerCollection;}
 void Player::setHealth(int h){ health = h; }
 void Player::setFacing(FACING facing){ this->facing = facing; }
 void Player::setScore(int h){ score = h; }
@@ -206,7 +213,11 @@ void Player::checkCollisions(){
                 score +=20;
                 entity->remove = true;
                 PowerCollection.push_back(new GhostKillerPowerUp(this,this->getPlayerEm()));
-
+            }
+            if(dynamic_cast<Ultimate*>(entity)){
+                prueba = new UltimatePowerUp(this);
+                prueba->activate();
+                entity->remove = true;
             }
         }
     }
@@ -237,4 +248,20 @@ Player::~Player(){
     delete walkDown;
     delete walkLeft;
     delete walkRight;
+}
+
+void Player::sortPowerUp(){
+    if(PowerCollection.size()>1){
+    for (int i = 0; i < PowerCollection.size()-1;i++){
+        int MaxPos = i;
+        for (int j = i + 1; j < PowerCollection.size();j++){
+            if (PowerCollection[j]->getRank()>PowerCollection[MaxPos]->getRank()){
+                MaxPos = j;
+            }
+        }
+        PowerUp* temp = PowerCollection[i];
+        PowerCollection[i] = PowerCollection[MaxPos];
+        PowerCollection[MaxPos] = temp;
+    }
+    }
 }

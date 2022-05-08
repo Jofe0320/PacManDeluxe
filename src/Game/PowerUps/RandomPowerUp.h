@@ -16,6 +16,7 @@ public:
         this->Pacman  = Pac;
         this->em = em;
         this->setRank(1);
+        this->setName("Point boost");
     }
     Player* getPacman();
     EntityManager* getEm();

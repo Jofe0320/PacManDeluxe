@@ -36,6 +36,7 @@ class Player: public Entity{
         Animation *walkRight;
         EntityManager* em;
         vector<PowerUp*> PowerCollection;
+        PowerUp* prueba;
             
 
 
@@ -46,6 +47,7 @@ class Player: public Entity{
         int getScore();
         EntityManager* getPlayerEm();
         FACING getFacing();
+        vector<PowerUp*> getPowerCollection();
         void setHealth(int);
         void setScore(int);
         void setFacing(FACING facing);
@@ -58,5 +60,7 @@ class Player: public Entity{
         void reset();
         void checkCollisions();
         void die();
+        void sortPowerUp();
         int StrawStepCounter = 50;
+
 };
