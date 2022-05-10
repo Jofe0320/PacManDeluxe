@@ -3,6 +3,7 @@
 
 Ghost::Ghost(int x, int y, int width, int height, ofImage spriteSheet, EntityManager* em, string color): Entity(x, y, width, height){
     this->em = em;
+    ghostSpawn = color;
     vector<ofImage> killableFrames;
     ofImage temp;
     temp.cropFrom(spriteSheet, 584, 64, 16, 16);
@@ -27,17 +28,25 @@ void Ghost::tick(){
     killableAnim->tick();
     canMove = true;
     checkCollisions();
-    if(canMove){
+    if(canMove && eyes == false){
         if(facing == UP){
             y-= speed;
+            yPosition.push_back(y);
+            xPosition.push_back(x);
         }else if(facing == DOWN){
             y+=speed;
+            yPosition.push_back(y);
+            xPosition.push_back(x);
         }else if(facing == LEFT){
             x-=speed;
+            yPosition.push_back(y);
+            xPosition.push_back(x);
         }else if(facing == RIGHT){
             x+=speed;
+            yPosition.push_back(y);
+            xPosition.push_back(x);
         }
-    }else{
+    }else if(canMove == false && eyes == false){
         int randInt;
         if(justSpawned){
             randInt = ofRandom(2);
@@ -56,11 +65,26 @@ void Ghost::tick(){
         }
         justSpawned = false;
 
+    }else if(eyes == true){
+        if(!xPosition.empty() && !yPosition.empty()){
+        setEyes();}
+        else{
+            eyes = false;
+            ofImage spriteSheet;
+            spriteSheet.load("images/Background.png");
+            if(ghostSpawn == "red")      sprite.cropFrom(spriteSheet,456,64,16,16);
+            else if(ghostSpawn=="pink")  sprite.cropFrom(spriteSheet,456,80,16,16);
+            else if(ghostSpawn=="cyan")  sprite.cropFrom(spriteSheet,456,96,16,16);
+            else if(ghostSpawn=="orange")sprite.cropFrom(spriteSheet,456,112,16,16);
+            facing = UP;
+            justSpawned = true;
+            setKillable(false);
+            }
     }
 }
 
 void Ghost::render(){
-    if(killable){
+    if(killable && eyes == false){
         killableAnim->getCurrentFrame().draw(x,y,width,height);
     }else{
         Entity::render();
@@ -98,6 +122,27 @@ void Ghost::checkCollisions(){
                 break;
         }
     }
+}
+
+void Ghost::setEyes(){
+    ofImage spriteSheet;
+    spriteSheet.load("images/Background.png");
+    sprite.cropFrom(spriteSheet, 584, 80, 16, 16);
+    if(xPosition[xPosition.size()] == xPosition[xPosition.size()-1]){
+    y = y - (yPosition[yPosition.size()] - yPosition[yPosition.size()-1]);
+    yPosition.pop_back();
+    xPosition.pop_back();
+    }
+    else if(yPosition[yPosition.size()] == yPosition[yPosition.size()-1])
+    {
+        x = x - (xPosition[xPosition.size()] - xPosition[xPosition.size()-1]);
+        yPosition.pop_back();
+        xPosition.pop_back();
+    }
+    else{
+        yPosition.pop_back();
+        xPosition.pop_back();
+        }
 }
 
 Ghost::~Ghost(){

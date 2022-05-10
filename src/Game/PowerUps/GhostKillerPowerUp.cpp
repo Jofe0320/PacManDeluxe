@@ -15,6 +15,6 @@ void GhostKillerPowerUp::activate(){
 // This loop eliminates the ghosts
 for(Entity* entity:em->ghosts){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
-                ghost->remove = true;
+                ghost->eyes = true;
     }
 }

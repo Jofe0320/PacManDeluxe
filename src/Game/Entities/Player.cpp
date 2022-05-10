@@ -225,10 +225,13 @@ void Player::checkCollisions(){
         if(collides(entity)){
             Ghost* ghost = dynamic_cast<Ghost*>(entity);
             if (StrawStepCounter > 50){
-            if(ghost->getKillable())
-                ghost->remove = true;
-            else
+            if(ghost->getKillable() && ghost->eyes == false){
+                ghost->setKillable(false);
+                ghost->eyes = true;
+            }
+            else if (ghost->getKillable() == false && ghost->eyes == false){
                 die();
+            }
             }
         }
     }
