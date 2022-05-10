@@ -3,6 +3,7 @@
 #include "State.h"
 #include "Player.h"
 #include "MapBuilder.h"
+#include "GPS.h"
 
 class GameState: public State{
     public: 
@@ -27,5 +28,6 @@ class GameState: public State{
 		Map* map;
 		int finalScore=0;
 		int CurrentScore;
+		GPS* gps;
 
 };
