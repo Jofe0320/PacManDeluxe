@@ -17,7 +17,6 @@ class GPS{
         void render();
         void lockFruitOnMap();
         Entity* TargetFruit;
-
-
-
+        vector<vector<int>> PathFinder(int row, int col,vector<vector<int>> Path);
+        vector<vector<int>> Path;
 };
