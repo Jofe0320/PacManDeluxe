@@ -20,7 +20,6 @@ void GPS::render(){
 void GPS::createMatrix(){
     for (int y = 72; y < 712;y += 16){
         mapMatrix.push_back(vector<int>());
-<<<<<<< HEAD
         for (int x = 207;x<816;x+=16){
 
             bool foundBound = false;
@@ -42,7 +41,6 @@ void GPS::drawMatrix(){
         int x = 204;
         for (int j = 0;j<mapMatrix[i].size();j++){
             if(mapMatrix[i][j] == 1) ofSetColor(0,0,255);
-<<<<<<< HEAD
             else if(mapMatrix[i][j] == 2) ofSetColor(255,211,25);
             else if(mapMatrix[i][j] == 3) ofSetColor(255,255,0);
             else if(mapMatrix[i][j] == 0) ofSetColor(0,0,0);
@@ -70,12 +68,11 @@ void GPS::keyPressed(int key){
             lockFruitOnMap(em);
             break;
         case '5':
-            Path = PathFinder(37,1,Path);
+            PathFinder(row, col, Path);
             break;
     }
 }
 
-<<<<<<< HEAD
 void GPS::lockFruitOnMap(EntityManager* em){
     for (Entity* x : em->entities){
         if (dynamic_cast<Cherry*>(x) || dynamic_cast<Fruits*>(x)|| dynamic_cast<GhostKiller*>(x)||dynamic_cast<Strawberry*>(x)||dynamic_cast<Ultimate*>(x)){
@@ -102,6 +99,7 @@ int k = -1;
         }
         }
     }
+}
 
 vector<vector<int>> GPS::PathFinder(int row, int col,vector<vector<int>>Path){
     

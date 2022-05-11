@@ -20,4 +20,8 @@ class GPS{
         Entity* TargetFruit;
         vector <double> fruitDistance;
         double d;
+        vector<vector<int>> PathFinder(int, int,vector<vector<int>>);
+        vector<vector<int>> Path;
+        int row;
+        int col;
 };
