@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "EntityManager.h"
 #include "Player.h"
+#include "math.h"
 class GPS{
     private:
         vector<vector<int>>mapMatrix;
@@ -15,8 +16,10 @@ class GPS{
         void keyPressed(int key);
         void tick();
         void render();
-        void lockFruitOnMap();
+        void lockFruitOnMap(EntityManager*);
         Entity* TargetFruit;
+        vector <double> fruitDistance;
+        double d;
 
 
 

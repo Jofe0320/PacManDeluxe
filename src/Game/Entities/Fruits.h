@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Entity.h"
-#include "ofImage.h"
 
 class Fruits: public Entity{
     public:
