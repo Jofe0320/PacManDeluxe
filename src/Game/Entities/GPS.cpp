@@ -20,7 +20,9 @@ void GPS::render(){
 void GPS::createMatrix(){
     for (int y = 72; y < 712;y += 16){
         mapMatrix.push_back(vector<int>());
+<<<<<<< HEAD
         for (int x = 207;x<816;x+=16){
+
             bool foundBound = false;
             for (auto w : em->boundBlocks){
                 if (ofRectangle(x,y,1,1).intersects(w->getBounds())){
@@ -40,6 +42,7 @@ void GPS::drawMatrix(){
         int x = 204;
         for (int j = 0;j<mapMatrix[i].size();j++){
             if(mapMatrix[i][j] == 1) ofSetColor(0,0,255);
+<<<<<<< HEAD
             else if(mapMatrix[i][j] == 2) ofSetColor(255,211,25);
             else if(mapMatrix[i][j] == 3) ofSetColor(255,255,0);
             else if(mapMatrix[i][j] == 0) ofSetColor(0,0,0);
@@ -51,6 +54,7 @@ void GPS::drawMatrix(){
         }
         y += 16;
     }
+    mapMatrix[13][15] = 2;
 }
 
 void GPS::keyPressed(int key){
@@ -65,9 +69,13 @@ void GPS::keyPressed(int key){
         case '3':
             lockFruitOnMap(em);
             break;
+        case '5':
+            Path = PathFinder(37,1,Path);
+            break;
     }
 }
 
+<<<<<<< HEAD
 void GPS::lockFruitOnMap(EntityManager* em){
     for (Entity* x : em->entities){
         if (dynamic_cast<Cherry*>(x) || dynamic_cast<Fruits*>(x)|| dynamic_cast<GhostKiller*>(x)||dynamic_cast<Strawberry*>(x)||dynamic_cast<Ultimate*>(x)){
@@ -94,4 +102,53 @@ int k = -1;
         }
         }
     }
+
+vector<vector<int>> GPS::PathFinder(int row, int col,vector<vector<int>>Path){
+    
+    if (row < 0 || row > 39) {
+        return Path;
+    }
+    if (col < 0 || col > 39) {
+        
+        return Path;
+    }
+    if (mapMatrix[row][col] == 2) {  // Found Power
+        vector<int> x = {row,col};
+        Path.push_back(x);
+        return Path;
+    }
+    if (mapMatrix[row][col] == 1) {  // Hit on wall
+        return Path;
+    }
+    if (mapMatrix[row][col] == 3) {  // Been there
+        return Path;
+    }
+    mapMatrix[row][col] = 3;  // Mark new place
+
+    Path = PathFinder(row-1, col,Path);
+    if (!Path.empty()) {  // Try up
+        vector<int> x = {row,col};
+        Path.push_back(x);
+        return Path;
+    }
+    Path = PathFinder(row, col+1,Path);
+    if (!Path.empty()) {  // Try right
+        vector<int> x = {row,col};
+        Path.push_back(x);
+        return Path;
+    }
+    Path = PathFinder(row+1, col,Path);
+    if (!Path.empty()) {  // Try Down
+        vector<int> x = {row,col};
+        Path.push_back(x);
+        return Path;
+    }
+    Path = PathFinder(row, col-1,Path);
+    if (!Path.empty()) {  // Try left
+        vector<int> x = {row,col};
+        Path.push_back(x);
+        return Path;
+    }
+    return Path;
+
 }

@@ -20,7 +20,4 @@ class GPS{
         Entity* TargetFruit;
         vector <double> fruitDistance;
         double d;
-
-
-
 };
