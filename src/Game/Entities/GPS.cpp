@@ -4,9 +4,8 @@
 #include"GhostKiller.h"
 #include"Cherry.h"
 #include"Ultimate.h"
-GPS::GPS(EntityManager* em,Player* player){
+GPS::GPS(EntityManager* em){
     this->em = em;
-    this->player = player;
     createMatrix();
 
 }
@@ -16,6 +15,7 @@ void GPS::render(){
         drawMatrix();
     }
 }
+
 //Change code as much as posible 
 void GPS::createMatrix(){
     for (int y = 72; y < 712;y += 16){
@@ -52,7 +52,6 @@ void GPS::drawMatrix(){
         }
         y += 16;
     }
-    mapMatrix[13][15] = 2;
 }
 
 void GPS::keyPressed(int key){
@@ -65,7 +64,7 @@ void GPS::keyPressed(int key){
             }
             break;
         case '3':
-            lockFruitOnMap(em);
+            lockFruitOnMap();
             break;
         case '5':
             PathFinder(row, col, Path);
@@ -73,32 +72,28 @@ void GPS::keyPressed(int key){
     }
 }
 
-void GPS::lockFruitOnMap(EntityManager* em){
-    for (Entity* x : em->entities){
-        if (dynamic_cast<Cherry*>(x) || dynamic_cast<Fruits*>(x)|| dynamic_cast<GhostKiller*>(x)||dynamic_cast<Strawberry*>(x)||dynamic_cast<Ultimate*>(x)){
-            d=sqrt((pow((x->getX()-player->getX()),2))+(pow((x->getY()-player->getY()),2)));
-                fruitDistance.push_back(d);
-        }
+Player* GPS::getPlayer(){
+    return this->player;
+}
+
+Entity* GPS::findClosestFruit(){
+    for(Entity* entity: em->entities){
+        if (!dynamic_cast<Dot*>(entity) && !dynamic_cast<BigDot*>(entity) && !dynamic_cast<Player*>(entity)){
+            fruitVector.push_back(entity);
     }
-    double lowest = fruitDistance[0];
-    int j =0;
-    for (int i =1; i<fruitDistance.size(); i++){
-        if(lowest > fruitDistance[i]){
-            lowest = fruitDistance[i];
-            j=i;
-        }
     }
 
-int k = -1;
-    for (Entity* x : em->entities){
-        if (dynamic_cast<Cherry*>(x) || dynamic_cast<Fruits*>(x)|| dynamic_cast<GhostKiller*>(x)||dynamic_cast<Strawberry*>(x)||dynamic_cast<Ultimate*>(x)){
-        k++;
-        if(k == j){
-            mapMatrix[(x->getY()-64)/16][(x->getX()-200)/16] = 2;
-            break;
+    for(Entity* entity: fruitVector){
+        if(d > sqrt((pow((entity->getX()-getPlayer()->getX()),2))+(pow((entity->getY()-getPlayer()->getY()),2)))){
+            d = sqrt(pow((entity->getX()-getPlayer()->getX()),2))+(pow((entity->getY()-getPlayer()->getY()),2));
+            TargetFruit = entity;
         }
         }
-    }
+    return TargetFruit;
+}
+
+void GPS::lockFruitOnMap(){
+    mapMatrix[(findClosestFruit()->getY()-64)/16][(findClosestFruit()->getX()-200)/16] = 2;
 }
 
 vector<vector<int>> GPS::PathFinder(int row, int col,vector<vector<int>>Path){

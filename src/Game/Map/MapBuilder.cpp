@@ -71,7 +71,7 @@ Map* MapBuilder::createMap(ofImage mapImage, string characterID){
                 GhostSpawner* ghostSpawn = new GhostSpawner(xPos,yPos,pixelMultiplier,pixelMultiplier,entityManager, pacmanSpriteSheet);
                 mapInCreation->setGhostSpawner(ghostSpawn);
             }else if(currentPixel == dotC){           //Here we put fruits in random positions in the map
-				if ((dotCounter)%(rand()%250+1) == 0 && keyNumber == 1 ){
+				if (dotCounter == 0 && keyNumber == 1 ){
 					GhostKiller* ghostKiller = new GhostKiller(xPos,yPos,pixelMultiplier,pixelMultiplier, pacmanSpriteSheet);
 					mapInCreation->addEntity(ghostKiller);
 					keyNumber--;

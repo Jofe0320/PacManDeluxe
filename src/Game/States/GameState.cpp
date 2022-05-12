@@ -9,7 +9,7 @@ GameState::GameState() {
 	mapImage.load("images/map1.png");
 	map = MapBuilder().createMap(mapImage, getCharacter());
 	pacmanSpriteSheet.load("images/Background.png");
-	gps = new GPS(map->getEntityManager(),map->getPlayer());
+	gps = new GPS(map->getEntityManager());
 }
 void GameState::tick() {
 	if(!music.isPlaying()){
@@ -38,7 +38,7 @@ void GameState::tick() {
 
 void GameState::render() {
 	string PowerNames = "";
-	for (int i = 0; i < map->getPlayer()->getPowerCollection().size();i++){
+	for (unsigned int i = 0; i < map->getPlayer()->getPowerCollection().size();i++){
 		if (map->getPlayer()->getPowerCollection().size() == 1){
 			PowerNames = PowerNames + map->getPlayer()->getPowerCollection()[i]->getName();
 		}else{
