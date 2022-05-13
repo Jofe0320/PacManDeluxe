@@ -37,6 +37,7 @@ class Player: public Entity{
         EntityManager* em;
         vector<PowerUp*> PowerCollection;
         PowerUp* prueba;
+        vector<vector<int>>mapMatrix;
             
 
 
@@ -62,5 +63,17 @@ class Player: public Entity{
         void die();
         void sortPowerUp();
         int StrawStepCounter = 50;
-
+        void lockFruitOnMap();
+        Entity* TargetFruit;
+        vector <double> fruitDistance;
+        vector<vector<int>> PathFinder(int, int,vector<vector<int>>);
+        vector<vector<int>> Path;
+        int row;
+        int col;
+        vector<Entity*> fruitVector;
+        Entity* findClosestFruit();
+        int d = 100000;
+        bool drawMatrixFlag = false;
+        void createMatrix();
+        void drawMatrix();
 };

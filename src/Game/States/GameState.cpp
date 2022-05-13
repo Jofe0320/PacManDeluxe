@@ -9,7 +9,7 @@ GameState::GameState() {
 	mapImage.load("images/map1.png");
 	map = MapBuilder().createMap(mapImage, getCharacter());
 	pacmanSpriteSheet.load("images/Background.png");
-	gps = new GPS(map->getEntityManager());
+	
 }
 void GameState::tick() {
 	if(!music.isPlaying()){
@@ -47,12 +47,12 @@ void GameState::render() {
 	}
 	ofDrawBitmapString(PowerNames, ofGetWidth()/2-4*PowerNames.size(), (ofGetHeight()/2-300) + 625, 50);
 	map->render();
-	gps->render();
+	
 }
 
 void GameState::keyPressed(int key){
 	map->keyPressed(key);
-	gps->keyPressed(key);
+
 	if(key == 'y'){
 		CurrentScore = map->getPlayer()->getScore();
 		setNextState("Win");
