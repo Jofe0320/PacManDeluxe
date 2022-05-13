@@ -183,7 +183,8 @@ void Player::keyPressed(int key){
             PathFinder(row, col, Path);
             break;
         case '6':
-        mapMatrix[Path[Path.size()-1][0]][Path[Path.size()-1][1]] = 6;
+        mapMatrix[Path[gpsSomething][0]][Path[gpsSomething][1]] = 6;
+        gpsSomething++;
         break;
     }
 }
@@ -414,5 +415,5 @@ vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>> Path
         return this->Path;
     }
     return this->Path;
-
+    gpsSomething = this->Path.size()-2;
 }
