@@ -109,15 +109,6 @@ void Player::render(){
     ofSetColor(256, 0, 0);
     ofDrawBitmapString("Health: ", ofGetWidth()/2 + 100, 50);
     
-    for (unsigned int i = 0; i<Path.size()/3; i++){
-        ofDrawBitmapString(to_string(Path[i][0])+", " + to_string(Path[i][1]), ofGetWidth()/2 + 100, 100+16*i);
-    }
-    for (unsigned int i = Path.size()/3; i<2*Path.size()/3; i++){
-        ofDrawBitmapString(to_string(Path[i][0])+", " + to_string(Path[i][1]), ofGetWidth()/2 + 200, 100+(16*(i-Path.size()/3)));
-    }
-    for (unsigned int i = 2*(Path.size()/3); i<Path.size(); i++){
-        ofDrawBitmapString(to_string(Path[i][0])+", " + to_string(Path[i][1]), ofGetWidth()/2 + 300, 100+(16*(i-2*(Path.size()/3))));
-        }
 
     for(unsigned int i=0; i<health; i++){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
@@ -158,7 +149,7 @@ void Player::keyPressed(int key){
             PowerCollection.erase(PowerCollection.begin());
             }
             break; 
-        case '2':
+        case '1':
             if (drawMatrixFlag == false){
                 createMatrix();
                 drawMatrixFlag = true;
@@ -166,26 +157,36 @@ void Player::keyPressed(int key){
                 drawMatrixFlag = false;
                 mapMatrix.clear();
             }
-            break;
         case '3':
             if(target == false){
+            target = true;
             lockFruitOnMap();
             }
             else{
                 d = 10000;
                 target = false;
             }
-            break;
         case '5':
             Path.clear();
+            if(target == true){
             row = (getY()-64)/16;
             col = (getX()-200)/16;
             PathFinder(row, col, Path);
-            break;
+            }
         case '6':
-        mapMatrix[Path[gpsSomething][0]][Path[gpsSomething][1]] = 6;
-        gpsSomething++;
+        if(target == true){
+        for (unsigned int i = 0; i < Path.size()-1; i++){
+        mapMatrix[Path[i][0]][Path[i][1]] = 6;
+        }
+        for (int i = 0; i <=39; i++){
+            for (int j = 0; j<40;j++){
+                if(!(mapMatrix[i][j] == 1) && !(mapMatrix[i][j] == 6)){
+                    mapMatrix[i][j] = 0;
+                }
+            }
+        }
         break;
+        }
     }
 }
 
@@ -364,7 +365,6 @@ Entity* Player::findClosestFruit(){
 }
 
 void Player::lockFruitOnMap(){
-    target = true;
     mapMatrix[(findClosestFruit()->getY()-64)/16][(findClosestFruit()->getX()-200)/16] = 2;
 }
 
@@ -415,5 +415,4 @@ vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>> Path
         return this->Path;
     }
     return this->Path;
-    gpsSomething = this->Path.size()-2;
 }

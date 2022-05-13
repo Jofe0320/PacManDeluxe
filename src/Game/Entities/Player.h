@@ -77,5 +77,4 @@ class Player: public Entity{
         void createMatrix();
         void drawMatrix();
         bool target = false;
-        int gpsSomething = 0;
 };
