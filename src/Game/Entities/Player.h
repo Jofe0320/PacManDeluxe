@@ -72,8 +72,9 @@ class Player: public Entity{
         int col;
         vector<Entity*> fruitVector;
         Entity* findClosestFruit();
-        int d = 100000;
+        double d = 100000;
         bool drawMatrixFlag = false;
         void createMatrix();
         void drawMatrix();
+        bool target = false;
 };

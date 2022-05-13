@@ -148,18 +148,27 @@ void Player::keyPressed(int key){
             PowerCollection.erase(PowerCollection.begin());
             }
             break; 
-         case '2':
+        case '2':
             if (drawMatrixFlag == false){
                 createMatrix();
                 drawMatrixFlag = true;
             }else{
                 drawMatrixFlag = false;
+                mapMatrix.clear();
             }
             break;
         case '3':
+            if(target == false){
             lockFruitOnMap();
+            }
+            else{
+                d = 10000;
+                target = false;
+            }
             break;
         case '5':
+            row = (getY()-64)/16;
+            col = (getX()-200)/16;
             PathFinder(row, col, Path);
             break;
     }
@@ -331,8 +340,8 @@ Entity* Player::findClosestFruit(){
     }
 
     for(Entity* entity: fruitVector){
-        if(d > sqrt((pow((entity->getX()-this->getX()),2))+(pow((entity->getY()-this->getY()),2)))){
-            d = sqrt(pow((entity->getX()-this->getX()),2))+(pow((entity->getY()-this->getY()),2));
+        if(d > sqrt((pow((entity->getX()-x),2))+(pow((entity->getY()-y),2)))){
+            d = sqrt(pow((entity->getX()-x),2)+(pow((entity->getY()-y),2)));
             TargetFruit = entity;
         }
         }
@@ -340,15 +349,16 @@ Entity* Player::findClosestFruit(){
 }
 
 void Player::lockFruitOnMap(){
+    target = true;
     mapMatrix[(findClosestFruit()->getY()-64)/16][(findClosestFruit()->getX()-200)/16] = 2;
 }
 
 vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>>Path){
     
-    if (row < 0 || row > 39) {
+    if (!(row >= 0) && !(row <= 39)){
         return Path;
     }
-    if (col < 0 || col > 39) {
+    if (!(col >= 0) && !(col <= 42)){
         
         return Path;
     }
@@ -364,7 +374,7 @@ vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>>Path)
         return Path;
     }
     mapMatrix[row][col] = 3;  // Mark new place
-
+    
     Path = PathFinder(row-1, col,Path);
     if (!Path.empty()) {  // Try up
         vector<int> x = {row,col};

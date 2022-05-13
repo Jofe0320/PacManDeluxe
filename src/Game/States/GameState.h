@@ -28,6 +28,7 @@ class GameState: public State{
 		Map* map;
 		int finalScore=0;
 		int CurrentScore;
+		bool eaten = false;
 	
 
 };

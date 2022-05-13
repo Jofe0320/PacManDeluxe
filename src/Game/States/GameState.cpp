@@ -16,8 +16,9 @@ void GameState::tick() {
 			music.play();
 	}
 	map->tick();
-	if(map->getPlayer()->getScore()>=1000){
+	if(map->getPlayer()->getScore()>=1000 && eaten == false){
 		map->addEntity(new Ultimate(map->getEntityManager()->entities[0]->getX(),map->getEntityManager()->entities[0]->getY(),16,16,pacmanSpriteSheet));
+		eaten = true;
 	}
 	if(map->getPlayer()->getHealth() == 0){
 		setFinished(true);
