@@ -108,6 +108,16 @@ void Player::render(){
     }
     ofSetColor(256, 0, 0);
     ofDrawBitmapString("Health: ", ofGetWidth()/2 + 100, 50);
+    
+    for (unsigned int i = 0; i<Path.size()/3; i++){
+        ofDrawBitmapString(to_string(Path[i][0])+", " + to_string(Path[i][1]), ofGetWidth()/2 + 100, 100+16*i);
+    }
+    for (unsigned int i = Path.size()/3; i<2*Path.size()/3; i++){
+        ofDrawBitmapString(to_string(Path[i][0])+", " + to_string(Path[i][1]), ofGetWidth()/2 + 200, 100+(16*(i-Path.size()/3)));
+    }
+    for (unsigned int i = 2*(Path.size()/3); i<Path.size(); i++){
+        ofDrawBitmapString(to_string(Path[i][0])+", " + to_string(Path[i][1]), ofGetWidth()/2 + 300, 100+(16*(i-2*(Path.size()/3))));
+        }
 
     for(unsigned int i=0; i<health; i++){
         ofDrawCircle(ofGetWidth()/2 + 25*i +200, 50, 10);
@@ -167,10 +177,14 @@ void Player::keyPressed(int key){
             }
             break;
         case '5':
+            Path.clear();
             row = (getY()-64)/16;
             col = (getX()-200)/16;
             PathFinder(row, col, Path);
             break;
+        case '6':
+        mapMatrix[Path[Path.size()-1][0]][Path[Path.size()-1][1]] = 6;
+        break;
     }
 }
 
@@ -324,7 +338,7 @@ void Player::drawMatrix(){
             else if(mapMatrix[i][j] == 0) ofSetColor(0,0,0);
             else if(mapMatrix[i][j] == 4) ofSetColor(0,255,0);
             else if(mapMatrix[i][j] == 5) ofSetColor(255,255,0);
-            else if(mapMatrix[i][j] == 6) ofSetColor(255,255,255);
+            else if(mapMatrix[i][j] == 6) ofSetColor(255,0,255);
             ofDrawBitmapString(ofToString(mapMatrix[i][j]),x,y);
             x += 16;
         }
@@ -353,52 +367,52 @@ void Player::lockFruitOnMap(){
     mapMatrix[(findClosestFruit()->getY()-64)/16][(findClosestFruit()->getX()-200)/16] = 2;
 }
 
-vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>>Path){
+vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>> Path){
     
     if (!(row >= 0) && !(row <= 39)){
-        return Path;
+        return this->Path;
     }
     if (!(col >= 0) && !(col <= 42)){
         
-        return Path;
+        return this->Path;
     }
     if (mapMatrix[row][col] == 2) {  // Found Power
         vector<int> x = {row,col};
-        Path.push_back(x);
-        return Path;
+        this->Path.push_back(x);
+        return this->Path;
     }
     if (mapMatrix[row][col] == 1) {  // Hit on wall
-        return Path;
+        return this->Path;
     }
     if (mapMatrix[row][col] == 3) {  // Been there
-        return Path;
+        return this->Path;
     }
     mapMatrix[row][col] = 3;  // Mark new place
     
-    Path = PathFinder(row-1, col,Path);
-    if (!Path.empty()) {  // Try up
+    this->Path = PathFinder(row-1, col,Path);
+    if (!this->Path.empty()) {  // Try up
         vector<int> x = {row,col};
-        Path.push_back(x);
-        return Path;
+        this->Path.push_back(x);
+        return this->Path;
     }
-    Path = PathFinder(row, col+1,Path);
-    if (!Path.empty()) {  // Try right
+    this->Path = PathFinder(row, col+1,Path);
+    if (!this->Path.empty()) {  // Try right
         vector<int> x = {row,col};
-        Path.push_back(x);
-        return Path;
+        this->Path.push_back(x);
+        return this->Path;
     }
-    Path = PathFinder(row+1, col,Path);
-    if (!Path.empty()) {  // Try Down
+    this->Path = PathFinder(row+1, col,Path);
+    if (!this->Path.empty()) {  // Try Down
         vector<int> x = {row,col};
-        Path.push_back(x);
-        return Path;
+        this->Path.push_back(x);
+        return this->Path;
     }
-    Path = PathFinder(row, col-1,Path);
-    if (!Path.empty()) {  // Try left
+    this->Path = PathFinder(row, col-1,Path);
+    if (!this->Path.empty()) {  // Try left
         vector<int> x = {row,col};
-        Path.push_back(x);
-        return Path;
+        this->Path.push_back(x);
+        return this->Path;
     }
-    return Path;
+    return this->Path;
 
 }
