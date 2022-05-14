@@ -164,6 +164,7 @@ void Player::keyPressed(int key){
             }
             else{
                 d = 10000;
+                fruitVector.clear();
                 target = false;
             }
         case '5':
@@ -328,7 +329,8 @@ void Player::createMatrix(){
         }
     }
 }
-//Change code as much as POsible 
+
+
 void Player::drawMatrix(){
     int y = 76;
     for (int i = 0; i<mapMatrix.size();i++){
@@ -349,7 +351,7 @@ void Player::drawMatrix(){
 }
 
 Entity* Player::findClosestFruit(){
-    for(Entity* entity: em->entities){
+    for(Entity* entity: getPlayerEm()->entities){
         if (!dynamic_cast<Dot*>(entity) && !dynamic_cast<BigDot*>(entity) && !dynamic_cast<Player*>(entity)){
             fruitVector.push_back(entity);
     }
