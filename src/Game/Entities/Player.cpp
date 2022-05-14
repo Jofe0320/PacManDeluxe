@@ -149,9 +149,10 @@ void Player::keyPressed(int key){
             PowerCollection.erase(PowerCollection.begin());
             }
             break; 
+        // This Controls everything that has to do with the GPS mode
         case '1':
             if (drawMatrixFlag == false){
-                createMatrix();
+                createMatrix();       
                 drawMatrixFlag = true;
             }else{
                 drawMatrixFlag = false;
@@ -292,7 +293,7 @@ Player::~Player(){
     delete walkLeft;
     delete walkRight;
 }
-
+// This method uses selection sort algorithm to sort the powerUps
 void Player::sortPowerUp(){
     if(PowerCollection.size()>1){
     for (int i = 0; i < PowerCollection.size()-1;i++){
@@ -308,7 +309,7 @@ void Player::sortPowerUp(){
     }
     }
 }
-
+// Create the map Matrix (fills the vector int the .h file)
 void Player::createMatrix(){
     for (int y = 72; y < 712;y += 16){
         mapMatrix.push_back(vector<int>());
@@ -327,7 +328,7 @@ void Player::createMatrix(){
     }
 }
 
-
+// Draws the map Matrix on the screen
 void Player::drawMatrix(){
     int y = 76;
     for (int i = 0; i<mapMatrix.size();i++){
@@ -346,7 +347,7 @@ void Player::drawMatrix(){
         y += 16;
     }
 }
-
+// Uses the Formula of Distance to establish what is the closest fruit
 Entity* Player::findClosestFruit(){
     for(Entity* entity: getPlayerEm()->entities){
         if (!dynamic_cast<Dot*>(entity) && !dynamic_cast<BigDot*>(entity) && !dynamic_cast<Player*>(entity)){
@@ -362,11 +363,12 @@ Entity* Player::findClosestFruit(){
         }
     return TargetFruit;
 }
-
+// Inserts a value of 2 in the position of the Target Fruit in the map
 void Player::lockFruitOnMap(){
     mapMatrix[(findClosestFruit()->getY()-64)/16][(findClosestFruit()->getX()-200)/16] = 2;
 }
 
+// Recursive Path Finding algorithm that saves all the coordinates into a vector of vectors of int 
 vector<vector<int>> Player::PathFinder(int row, int col,vector<vector<int>> Path){
     
     if (!(row >= 0) && !(row <= 39)){

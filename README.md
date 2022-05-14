@@ -13,9 +13,10 @@ p = pause game
 1 = gps to closest fruit (decent path)
 
 PowerUps description
-Fruits = have random sprites during the map and increase the player score in a random amount.
-Strawberries = make pacman invicible and invencible.
-Cherry = make pacman  move to random point in the map.
+Fruits = have random sprites during the map and increase the player score in a random amount.   rank = 1
+Strawberries = make pacman invicible and invencible.                                            rank = 3
+Cherry = make pacman  move to random point in the map.                                          rank = 2
+GhostKIller PowerUp = Kills all the Ghost on the map.                                           rank = 4
 Debugger EatingTimePowerUp = is available without eating anything and makes pacman able to eat ghosts.
 
 implemented ghost eyes where after eating a ghost, ghosts will return to spawn te be reborn.
