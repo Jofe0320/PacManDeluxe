@@ -157,7 +157,6 @@ void Player::keyPressed(int key){
                 drawMatrixFlag = false;
                 mapMatrix.clear();
             }
-        case '3':
             if(target == false){
             target = true;
             lockFruitOnMap();
@@ -167,14 +166,12 @@ void Player::keyPressed(int key){
                 fruitVector.clear();
                 target = false;
             }
-        case '5':
             Path.clear();
             if(target == true){
             row = (getY()-64)/16;
             col = (getX()-200)/16;
             PathFinder(row, col, Path);
             }
-        case '6':
         if(target == true){
         for (unsigned int i = 0; i < Path.size()-1; i++){
         mapMatrix[Path[i][0]][Path[i][1]] = 6;
